@@ -1,5 +1,6 @@
-name: bobobobo
+name: Your Github Workflow name
 on:
+  workflow_dispatch:
   schedule:
     - cron: '*/1 * * * *'
 
