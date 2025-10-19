@@ -3,7 +3,7 @@ name: Run every 5 minutes
 on:
   workflow_dispatch:
   schedule:
-    - cron: '*/8 * * * *' # 每 5 分钟（注意 GitHub 使用 UTC）
+    - cron: '*/5 * * * *' # 每 5 分钟（注意 GitHub 使用 UTC）
 
 jobs:
   run-python-script:
