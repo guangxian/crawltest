@@ -3,7 +3,7 @@ name: Run every 5 minutes (debug)
 on:
   workflow_dispatch:
   schedule:
-    - cron: '*/5 * * * *' # 注意：GitHub cron 使用 UTC
+    - cron: '0 1 * * *' # 注意：GitHub cron 使用 UTC  如23，就是第2天7点执行
 
 permissions:
   contents: read
