@@ -29,7 +29,7 @@ class Mx:
             url=url,
             json={},
             headers=headers,
-            timeout=151
+            timeout=152
         )
         response.raise_for_status()
         # response_data = response.json()
