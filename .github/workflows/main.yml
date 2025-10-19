@@ -1,16 +1,18 @@
-name: Your Github Workflow name
+name: Run every 5 minutes
+
 on:
   workflow_dispatch:
   schedule:
-    - cron: '*/5 * * * *'
+    - cron: '*/5 * * * *' # 每 5 分钟（注意 GitHub 使用 UTC）
 
 jobs:
   run-python-script:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - uses: actions/setup-python@v2
+      - uses: actions/setup-python@v4
         with:
-          python-version: '3.13.5'
+          python-version: '3.13'    # 推荐使用 v4 格式并指定主版本，避免小版本语法问题
+      - run: pip install --upgrade pip
       - run: pip install requests
       - run: python main.py
