@@ -19,6 +19,7 @@ class Mx:
 
     def go(self):
         # data = self.r('tides.json')
+        print('zhang san')
         url = 'https://open.feddon.com/api/edq/tide/tide/test'
         headers = {
             "Content-Type": "application/json",
