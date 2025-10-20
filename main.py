@@ -86,7 +86,7 @@ class Mx:
 
         try:
             resp = session.post(
-                url="https://open.feddon.com/api/edq/stage/create_stage",
+                url=url,
                 headers=headers,
                 json=data,
                 timeout=300)  # 增加 timeout

