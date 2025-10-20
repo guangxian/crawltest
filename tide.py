@@ -44,7 +44,7 @@ class Mx:
 
     def get_tide(self, data):
         stations = data['data']['items']
-        start = datetime.strptime('2025-10-20', '%Y-%m-%d')
+        start = datetime.strptime('2025-11-20', '%Y-%m-%d')
         end = datetime.strptime('2025-11-21', '%Y-%m-%d')
         tides = []
         # 使用列表推导式
