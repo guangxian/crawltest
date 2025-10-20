@@ -23,7 +23,7 @@ class Mx:
             api_url,
             json=payload,  # 自动设置 JSON 格式并序列化
             headers=headers,
-            timeout=10
+            timeout=100
         )
         data = response.json()
         self.format_data(data)
@@ -92,7 +92,10 @@ class Mx:
 
 if __name__ == '__main__':
     m = Mx()
-    m.go()
+    m.req({
+        'items': []
+    })
+
 
     # date_str = datetime.now().strftime("%Y-%m-%d")
     # print(date_str)  # 输出示例：2025-10-19
