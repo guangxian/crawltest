@@ -50,7 +50,7 @@ class Mx:
         # 使用列表推导式
         dates = [(start + timedelta(days=x)).strftime('%Y-%m-%d')
                  for x in range((end - start).days + 1)]
-        for _station in stations[:30]:
+        for _station in stations[:10]:
             if _station['code'] != 'T1933333333333':
                 for _date in dates:
                     time.sleep(0.1)
@@ -137,7 +137,7 @@ class Mx:
                 url=url,
                 headers=headers,
                 json=data,
-                timeout=300)  # 增加 timeout
+                timeout=900)  # 增加 timeout
             resp.raise_for_status()
             print(resp.json())
         except requests.exceptions.RequestException as e:
