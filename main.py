@@ -102,9 +102,10 @@ class Mx:
 
 if __name__ == '__main__':
     m = Mx()
-    m.req({
-        'items': []
-    })
+    m.go()
+    # m.req({
+    #     'items': []
+    # })
 
 
     # date_str = datetime.now().strftime("%Y-%m-%d")
