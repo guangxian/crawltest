@@ -1,6 +1,7 @@
 import requests
 from requests.adapters import HTTPAdapter
 from urllib3.util.retry import Retry
+from datetime import datetime, timedelta
 
 session = requests.Session()
 retries = Retry(total=5, backoff_factor=1, status_forcelist=[429, 500, 502, 503, 504], allowed_methods=["GET","POST","PUT","DELETE","HEAD","OPTIONS"])
@@ -9,6 +10,8 @@ session.mount("https://", adapter)
 session.mount("http://", adapter)
 
 try:
+    now = datetime.now()
+    print("request time: ", now.strftime("%Y-%m-%d %H:%M:%S"))
     resp = session.post(
         "https://open.feddon.com/api/edq/stage/create_stage",
         headers={
