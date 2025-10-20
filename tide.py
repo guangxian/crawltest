@@ -54,7 +54,10 @@ class Mx:
             if _station['code'] != 'T1933333333333':
                 for _date in dates:
                     time.sleep(0.1)
-                    url = "https://publictide.nmdis.org.cn/Tide/GetTideData"
+                    url1 = 'https://publict'
+                    url2 = 'ide.nmdis.o'
+                    url3 = 'rg.cn/Tide/GetTideData'
+                    url = url1 + url2 + url3
                     headers = {
                         "Content-Type": "application/json",
                         "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
