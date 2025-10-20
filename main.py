@@ -44,9 +44,6 @@ class Mx:
                 site_type = 'unknown'
                 site_type_desc = '站点类型未知'
 
-            if v['province'] and not v['city']:
-                v['city'] = '省直辖县'
-
             row = {
                 'siteType': site_type,
                 'riverWaterLevel': river_water_level,
