@@ -64,8 +64,8 @@ class Mx:
 
     def req(self, data):
         url1 = 'https://open.fedd'
-        url2 = 'on.com/api/edq/tid'
-        url3 = 'e/tide/create_tide'
+        url2 = 'on.com/api/edq/stag'
+        url3 = 'e/create_stage'
         url = url1 + url2 + url3
         auth1 = "yH5l9Mx9V4NZg"
         auth2 = "JWV5NDI4rfWbmCUPsnh"
