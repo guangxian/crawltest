@@ -78,11 +78,11 @@ class Mx:
             "Authorization": auth
         }
         session = requests.Session()
-        retries = Retry(total=5, backoff_factor=1, status_forcelist=[429, 500, 502, 503, 504],
-                        allowed_methods=["GET", "POST", "PUT", "DELETE", "HEAD", "OPTIONS"])
-        adapter = HTTPAdapter(max_retries=retries)
-        session.mount("https://", adapter)
-        session.mount("http://", adapter)
+        # retries = Retry(total=5, backoff_factor=1, status_forcelist=[429, 500, 502, 503, 504],
+        #                 allowed_methods=["GET", "POST", "PUT", "DELETE", "HEAD", "OPTIONS"])
+        # adapter = HTTPAdapter(max_retries=retries)
+        # session.mount("https://", adapter)
+        # session.mount("http://", adapter)
 
         try:
             resp = session.post(
