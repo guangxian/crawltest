@@ -1,58 +1,16 @@
-name: Run every 5 minutes (debug)
-
+name: Your Github Workflow name
 on:
   workflow_dispatch:
   schedule:
-    - cron: '0 1 * * *' # 注意：GitHub cron 使用 UTC  如23，就是第2天7点执行
-
-permissions:
-  contents: read
+    - cron:  '*/5 * * * *'
 
 jobs:
-  debug-and-run:
+  run-python-script:
     runs-on: ubuntu-latest
     steps:
-      - name: Print runner UTC time and env
-        run: |
-          echo "===== runner UTC time ====="
-          date -u +"%Y-%m-%d %H:%M:%S UTC"
-          echo
-          echo "GITHUB_EVENT_NAME=$GITHUB_EVENT_NAME"
-          echo "GITHUB_REF=$GITHUB_REF"
-          echo "GITHUB_SHA=$GITHUB_SHA"
-          echo "GITHUB_REPOSITORY=$GITHUB_REPOSITORY"
-          echo "GITHUB_ACTOR=$GITHUB_ACTOR"
-          echo "GITHUB_RUN_ID=$GITHUB_RUN_ID"
-          echo "GITHUB_RUN_NUMBER=$GITHUB_RUN_NUMBER"
-          echo "GITHUB_WORKFLOW=$GITHUB_WORKFLOW"
-          echo "===== end env ====="
-      - name: Dump event payload (if present)
-        run: |
-          echo "===== event payload ====="
-          if [ -n "$GITHUB_EVENT_PATH" ] && [ -f "$GITHUB_EVENT_PATH" ]; then
-            cat "$GITHUB_EVENT_PATH"
-          else
-            echo "no event payload file"
-          fi
-          echo "===== end payload ====="
-      - name: Checkout
-        uses: actions/checkout@v3
-      - name: Setup Python
-        uses: actions/setup-python@v4
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
         with:
           python-version: '3.13'
-      - name: Show python and pip versions
-        run: |
-          python --version
-          pip --version
-      - name: Install deps
-        run: |
-          pip install --upgrade pip
-          pip install -r requirements.txt || pip install requests || true
-      - name: Run your script
-        run: |
-          if [ -f main.py ]; then
-            python main.py
-          else
-            echo "main.py not found in repo root"
-          fi
+      - run: pip install requests
+      - run: python test.py
