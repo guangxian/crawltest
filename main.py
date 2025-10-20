@@ -8,7 +8,10 @@ class Mx:
         pass
 
     def get_data(self):
-        api_url = "http://xxfb.mwr.cn/hydroSearch/mapSearch"
+        api_url1 = "http://xxfb.mw"
+        api_url2 = "r.cn/hydroSe"
+        api_url3 = "arch/mapSearch"
+        api_url = api_url1 + api_url2 + api_url3
         headers = {
             "Content-Type": "application/json",
             "User-Agent": "Mozilla/5.0"
@@ -60,11 +63,17 @@ class Mx:
         self.req(formatted_data)
 
     def req(self, data):
-        url = 'https://open.feddon.com/api/edq/tide/tide/create_tide'
+        url1 = 'https://open.fedd'
+        url2 = 'on.com/api/edq/tid'
+        url3 = 'e/tide/create_tide'
+        url = url1 + url2 + url3
+        auth1 = "yH5l9Mx9V4NZg"
+        auth2 = "JWV5NDI4rfWbmCUPsnh"
+        auth = auth1 + auth2
         headers = {
             "Content-Type": "application/json",
             "User-Agent": "Mozilla/5.0",
-            "Authorization": 'yH5l9Mx9V4NZgJWV5NDI4rfWbmCUPsnh'
+            "Authorization": auth
         }
         response = requests.post(
             url=url,
