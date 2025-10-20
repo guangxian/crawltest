@@ -89,7 +89,7 @@ class Mx:
                 url="https://open.feddon.com/api/edq/stage/create_stage",
                 headers=headers,
                 json=data,
-                timeout=60)  # 增加 timeout
+                timeout=300)  # 增加 timeout
             resp.raise_for_status()
             print(resp.text)
         except requests.exceptions.RequestException as e:
