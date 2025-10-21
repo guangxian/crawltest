@@ -50,7 +50,7 @@ class Mx:
         # 使用列表推导式
         dates = [(start + timedelta(days=x)).strftime('%Y-%m-%d')
                  for x in range((end - start).days + 1)]
-        for _station in stations[90:120]:
+        for _station in stations[120:150]:
             if _station['code'] != 'T1933333333333':
                 for _date in dates:
                     time.sleep(0.1)
