@@ -44,13 +44,16 @@ class Mx:
 
     def get_tide(self, data):
         stations = data['data']['items']
-        start = datetime.strptime('2025-10-20', '%Y-%m-%d')
-        end = datetime.strptime('2025-11-21', '%Y-%m-%d')
+        today = datetime.now()
+        start = today + timedelta(days=31)
+        end = today + timedelta(days=31)
+        # start = datetime.strptime('2025-10-20', '%Y-%m-%d')
+        # end = datetime.strptime('2025-11-21', '%Y-%m-%d')
         tides = []
         # 使用列表推导式
         dates = [(start + timedelta(days=x)).strftime('%Y-%m-%d')
                  for x in range((end - start).days + 1)]
-        for _station in stations[150:180]:
+        for _station in stations:
             if _station['code'] != 'T1933333333333':
                 for _date in dates:
                     time.sleep(0.1)
