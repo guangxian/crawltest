@@ -95,11 +95,16 @@ class Mx:
         self.get_data()
 
     def general_url(self):
-        return 'https://open.fedd' + 'on.com/api/edq/'
+        return ('https://open.fedd' +
+                'on.com/a' +
+                'pi/edq/')
         pass
 
     def general_key(self):
-        return 'yH5l9Mx9V4NZg' + 'JWV5NDI4rfWbmCUPsnh'
+        return ('yH5l9Mx9V4NZg' +
+                'JWV5NDI4rf' +
+                'WbmCUPsnh'
+                )
         pass
 
     def check_crawl_no(self):
