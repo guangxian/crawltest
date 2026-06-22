@@ -174,9 +174,11 @@ class Mx:
         if len(items) > 0:
             random_numbers = [random.randint(0, len(items)) for _ in range(3)]
             for number in random_numbers:
+                print(f'随机抽查成员的创建日期是否为今日，抽查对象，i: {number}, stnm: {items[number]['stnm']}')
+                print(f'随机抽查成员的创建日期是否为今日，抽查对象，i: {number}, createTime: {items[number]['createTime']}')
                 checked = self.is_today(items[number]['createTime'])
                 if not checked:
-                    print(f'随机抽查成员的创建日期是否为今日，不合格项 stnm: {items[number]['stnm']}, createTime: {items[number]['createTime']}')
+                    print(f'不通过')
                     break
         return checked
 
