@@ -50,7 +50,7 @@ class TideV2:
         payload = {
             "start": str_start,
             "end": str_end,
-            "portCode": "T193"
+            # "portCode": "T193"
         }
 
         headers = self.headers
