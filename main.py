@@ -5,31 +5,21 @@ from datetime import datetime, timedelta, timezone
 from requests.adapters import HTTPAdapter
 from urllib3.util.retry import Retry
 import random
+import base64
+import random
+import binascii
 
 class Mx:
     def __init__(self):
+        self.headers = {"Content-Type": "application/json",
+                        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"}
+        self.a_e_u = "GYYTIOBVGIZTANRTGQ2DMZRXGY2GGMZTGY4DGNBVME3GINBZG42TMMRVHA3DINZZGRRTMZBUMU3TKNDDGMZDMOBTGU2WCNBYGRQTONRVGUZTENJWGY4DMMZWMQ2GKNTGGRRTGMRTGE3DQNRTGQ3DIZJWMM2TSNJYGRQTMYJWGE2DCM3EGNSA===="
+        self.a_i_u = "GYYTIOBVGIZTANRTGQ4DIZBTGY2GGNZZGM4TONRWGM2DONJWG42TIYZWMQ2WCNTDGVQTINZVGI3TMNRSGY4TGNJWME3DEMZSGMYDONRVHE2TQNBSG4YDIYZTGI2TMNTCGYZTKMZTHAZWI==="
+        self.a_i_k = "GY2TKNJWG4ZTCNRSGQ2DMYZUMU3DKNBUGZRTKNZUMU2DKMZVGYYTKYJTGA3TANJYGU3DMYJVGY2GMNJSGQ2TMYRTGA3DGNTEGVQTKOBVHE3GIMZRGQ2DKNRVGY2DEN3BGYZDMZBWG4ZWI==="
         pass
 
-    def get_data(self):
-        api_url1 = "http://xxfb.mw"
-        api_url2 = "r.cn/hydroSe"
-        api_url3 = "arch/mapSearch"
-        api_url = api_url1 + api_url2 + api_url3
-        headers = {
-            "Content-Type": "application/json",
-            "User-Agent": "Mozilla/5.0"
-        }
-        payload = {
-            "name": '周堂桥'  # 可根据需求动态生成
-        }
-        response = requests.post(
-            api_url,
-            json=payload,  # 自动设置 JSON 格式并序列化
-            headers=headers,
-            timeout=100
-        )
-        data = response.json()
-        self.format_data(data)
+    def k(self, str):
+        return base64.b64decode(binascii.unhexlify(base64.b32decode(str))).decode('utf-8')
 
     def format_data(self, data):
         items = []
@@ -66,11 +56,11 @@ class Mx:
         self.req(formatted_data)
 
     def req(self, data):
-        url = self.general_url() + "stage/create_stage"
+        url = self.k(self.a_i_u) + "stage/create_stage"
         headers = {
             "Content-Type": "application/json",
             "User-Agent": "Mozilla/5.0",
-            "Authorization": self.general_key()
+            "Authorization": self.k(self.a_i_k)
         }
         session = requests.Session()
         # retries = Retry(total=5, backoff_factor=1, status_forcelist=[429, 500, 502, 503, 504],
@@ -90,35 +80,19 @@ class Mx:
         except requests.exceptions.RequestException as e:
             print("请求失败：", e)
 
-    def go(self):
-        now = datetime.now()
-        print("request time: ", now.strftime("%Y-%m-%d %H:%M:%S"))
-        self.get_data()
-
     def start(self):
         self.check_crawl_no()
 
-    def general_url(self):
-        return ('https://open.fedd' +
-                'on.com/a' +
-                'pi/edq/')
-
-    def general_key(self):
-        return ('yH5l9Mx9V4NZg' +
-                'JWV5NDI4rf' +
-                'WbmCUPsnh'
-                )
-
     def check_crawl_no(self):
         print('check_crawl_no 检查采集号是否已存在')
-        url = self.general_url() + "stage/has_crawl_no"
+        url = self.k(self.a_i_u) + "stage/has_crawl_no"
         payload = {
             "crawlNo": datetime.now().strftime("%Y-%m-%d"),
         }
         headers = {
             "Content-Type": "application/json",
             "User-Agent": "Mozilla/5.0",
-            "Authorization": self.general_key(),
+            "Authorization": self.k(self.a_i_k),
         }
         response = requests.post(url, json=payload, headers=headers)
         if response.status_code == 200:
@@ -140,10 +114,7 @@ class Mx:
 
     def start_crawl(self):
         print('start_crawl 开始采集')
-        api_url1 = "http://xxfb.mw"
-        api_url2 = "r.cn/hydroSe"
-        api_url3 = "arch/mapSearch"
-        url = api_url1 + api_url2 + api_url3
+        url = self.k(self.a_e_u)
         headers = {
             "Content-Type": "application/json",
             "User-Agent": "Mozilla/5.0"
