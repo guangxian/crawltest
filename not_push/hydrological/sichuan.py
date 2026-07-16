@@ -1,13 +1,8 @@
 import requests
-import time
 import json
-from datetime import datetime, timedelta
-from requests.adapters import HTTPAdapter
-from urllib3.util.retry import Retry
-from bs4 import BeautifulSoup
-import os
+from datetime import datetime
 from pathlib import Path
-from poi import Poi
+from not_push.poi import Poi
 
 """
     站点名称：四川省水文水资源勘测中心
