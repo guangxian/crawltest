@@ -41,7 +41,7 @@ class TideV2:
 
         # 计算N天前和N天后的日期
         start = today - timedelta(days=2)
-        end = today + timedelta(days=2)
+        end = today + timedelta(days=15)
 
         # 格式化为 'YYYY-MM-DD' 的字符串形式
         str_start = start.strftime('%Y-%m-%d')
