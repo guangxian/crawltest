@@ -10,7 +10,7 @@ class A:
         headers = {
             'User-Agent': 'Mozilla/5.0',
             # 'Cookie': 'Hm_lvt_ca860721dce125856eb54faa9f7565a1=1786700246; HMACCOUNT=894AB083B6956AD6; prefers-color-scheme=light; bkdiao_spot_view_4748=1; bkdiao_spot_view_4608=1; Hm_lpvt_ca860721dce125856eb54faa9f7565a1=1786700741'
-            # 'Referer': 'HangZhou'
+            'Referer': 'Tokyo District 1 Street Decos'
         }
         params = {
             'action': 'bkdiao_get_spot_viewport_details',
@@ -28,7 +28,7 @@ class A:
         headers = {
             'User-Agent': 'Mozilla/5.0',
             # 'Cookie': 'Hm_lvt_ca860721dce125856eb54faa9f7565a1=1786700246; HMACCOUNT=894AB083B6956AD6; prefers-color-scheme=light; bkdiao_spot_view_4748=1; bkdiao_spot_view_4608=1; Hm_lpvt_ca860721dce125856eb54faa9f7565a1=1786700741'
-            'Referer': 'HangZhou'
+            'Referer': 'Tokyo District 1 Street Decos'
         }
         # params = {
         #     'action': 'bkdiao_get_spots_in_bounds',
