@@ -63,7 +63,7 @@ class A:
             # with open('result.json', 'w', encoding='utf-8') as f:
             #     json.dump(data, f, indent=4, ensure_ascii=False)
         else:
-            print('error....')
+            print('error.....')
 
 if __name__ == "__main__":
     a = A()
