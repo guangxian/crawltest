@@ -80,7 +80,7 @@ if __name__ == "__main__":
         _count = a.get_detail(result)
         total += _count
 
-    print(f'全部结束，总共 {total} 条数据')
+    print(f'ok 全部结束，总共 {total} 条数据')
 
     # a.get_detail('5112')
 
