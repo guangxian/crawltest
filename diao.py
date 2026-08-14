@@ -5,7 +5,7 @@ class A:
     def __init__(self):
         pass
 
-    def get_detail(self):
+    def get_detail(self, ids):
         url = 'https://www.bkdiao.com/wp-admin/admin-ajax.php'
         headers = {
             'User-Agent': 'Mozilla/5.0',
@@ -14,13 +14,19 @@ class A:
         }
         params = {
             'action': 'bkdiao_get_spot_viewport_details',
-            'ids': '5012,4581'
+            'ids': ids
         }
         response = requests.get(url, headers=headers, params=params, timeout=30)
 
         data = response.json()
 
-        print(data)
+        # print(data)
+
+        if isinstance(data['data'], dict):
+            result = list(data['data'].values())
+            return len(result)
+        else:
+            return 0
 
 
     def get_list(self):
@@ -61,7 +67,24 @@ class A:
 
 if __name__ == "__main__":
     a = A()
-    a.get_list()
+
+    arrays = [
+        [str(i) for i in range(start, start + 100)]
+        for start in range(4000, 4500, 100)
+    ]
+    # print(arrays[2])
+
+    total = 0
+    for array in arrays:
+        result = ",".join(array)
+        _count = a.get_detail(result)
+        total += _count
+
+    print(f'全部结束，总共 {total} 条数据')
+
+    # a.get_detail('5112')
+
+    # a.get_list()
 
 
     # 上传到github 测试文件下载
