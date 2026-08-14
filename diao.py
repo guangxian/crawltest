@@ -40,11 +40,11 @@ class A:
         # }
         params = {
             'action': 'bkdiao_get_spots_in_bounds',
-            'west': 62.01484884,
-            'east': 145.46371416,
-            'south': 24.558246360000002,
-            'north': 42.888923639999994,
-            'limit': 10000
+            'west': 29.081794599999995,
+            'east': 180,
+            'south': 20.265079280000002,
+            'north': 47.835157720000005,
+            'limit': 9890
         }
         response = requests.get(url, headers=headers, params=params, timeout=30)
 
