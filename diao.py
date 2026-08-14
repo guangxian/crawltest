@@ -63,7 +63,7 @@ class A:
             # with open('result.json', 'w', encoding='utf-8') as f:
             #     json.dump(data, f, indent=4, ensure_ascii=False)
         else:
-            print('error...')
+            print('error....')
 
 if __name__ == "__main__":
     a = A()
@@ -80,7 +80,7 @@ if __name__ == "__main__":
         _count = a.get_detail(result)
         total += _count
 
-    print(f'ok 全部结束，总共 {total} 条数据')
+    print(f'全部结束，总共 {total} 条数据')
 
     # a.get_detail('5112')
 
