@@ -218,6 +218,7 @@ if __name__ == "__main__":
     for _grid in last_10:
         simple_array.extend(a.get_list(_grid['west'], _grid['east'], _grid['south'], _grid['north']))
 
+    print(simple_array[-2:])
 
     # 只取id，并每100个id组成一个新数组
     id_batches = [
