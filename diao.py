@@ -249,8 +249,8 @@ if __name__ == "__main__":
         'items': simple_array,
     }
 
-    with open('result.json', 'w', encoding='utf-8') as f:
-        json.dump(data, f, indent=4, ensure_ascii=False)
+    # with open('result.json', 'w', encoding='utf-8') as f:
+    #     json.dump(data, f, indent=4, ensure_ascii=False)
 
 
     # 上传到github 测试文件下载
