@@ -26,7 +26,7 @@ class A:
                 # if item.get('spot_type') not in ('收费黑坑', '收费水库'):
                 items.append({
                     'id': item.get('id'),
-                    'fish': item.get['fish_type'].replace("、", ",")
+                    'fish': item.get('fish_type').replace("、", ",")
                 })
             return items
         else:
@@ -57,13 +57,13 @@ class A:
             for item in data.get("data"):
                 # if item.get('spot_type') not in ('收费黑坑', '收费水库'):
                 items.append({
-                    'id': item.get['id'],
+                    'id': item.get('id'),
                     'fish': "",
                     'type': 'WILD_FISHING',
                     'type_desc': '野钓',
-                    'lng': item.get['lng'],
-                    'lat': item.get['lat'],
-                    'address': item.get['title'],
+                    'lng': item.get('lng'),
+                    'lat': item.get('lat'),
+                    'address': item.get('title'),
                 })
             return items
         else:
