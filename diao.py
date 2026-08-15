@@ -229,7 +229,7 @@ if __name__ == "__main__":
     # 整理出第二个数组
     complex_array = []
     for id in id_batches:
-        complex_array.extend(a.get_detail(",".join(id)))
+        complex_array.extend(a.get_detail(",".join(str(i) for i in id)))
 
 
     # 根据第二个数组完善第一个数组
