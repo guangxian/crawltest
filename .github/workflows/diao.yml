@@ -20,3 +20,4 @@ jobs:
         with:
           name: result
           path: result.json
+          retention-days: 1  # 自定义保留天数，取值范围为 1-90 天
