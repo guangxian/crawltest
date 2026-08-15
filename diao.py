@@ -88,6 +88,27 @@ class A:
     def geocode(self, lng, lat):
         pass
 
+    def clean(self, items):
+        return_items = []
+        for item in items:
+            if item.get('spot_type') not in ('收费黑坑', '收费水库'):
+                fish = '' # item['fish_type'].replace("、", ",")
+                type = 'WILD_FISHING'
+                type_desc = '野钓'
+                lng = item['lng']
+                lat = item['lat']
+                address = item['title']
+
+                return_items.append({
+                    'fish': fish,
+                    'type': type,
+                    'type_desc': type_desc,
+                    'lng': lng,
+                    'lat': lat,
+                    'address': address,
+                })
+        return return_items
+
     def pos_grid(self):
         return [
             # 第1行（最北排）
@@ -232,9 +253,12 @@ if __name__ == "__main__":
 
     items = []
     grid = a.pos_grid()
-    last_10 = grid[49:55]
+    last_10 = grid[45:55]
     for _grid in last_10:
         items.extend(a.get_list(_grid['west'], _grid['east'], _grid['south'], _grid['north']))
+
+
+    items = a.clean(items)
 
     print(f' 全部结束，总共 {len(items)} 条数据')
 
