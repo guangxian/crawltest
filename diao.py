@@ -235,7 +235,7 @@ if __name__ == "__main__":
     for _grid in grid:
         items.extend(a.get_list(_grid['west'], _grid['east'], _grid['south'], _grid['north']))
 
-    print(f'全部结束，总共 {len(items)} 条数据')
+    print(f' 全部结束，总共 {len(items)} 条数据')
 
 
     # 上传到github 测试文件下载
