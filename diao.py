@@ -196,46 +196,46 @@ if __name__ == "__main__":
     a = A()
 
 
-    # 整理出第一个数组
-    simple_array = []
-    grid = a.pos_grid()
-    # last_10 = grid[46:56]
-    for _grid in grid:
-        simple_array.extend(a.get_list(_grid['west'], _grid['east'], _grid['south'], _grid['north']))
-
-    # print(simple_array[-2:])
-
-    # 只取id，并每100个id组成一个新数组
-    id_batches = [
-        [_['id'] for _ in simple_array[i:i + 100]]
-        for i in range(0, len(simple_array), 100)
-    ]
-
-    # 整理出第二个数组
-    complex_array = []
-    for id in id_batches:
-        complex_array.extend(a.get_detail(",".join(str(i) for i in id)))
-
-
-    # 根据第二个数组完善第一个数组
-    complex_map = {item['id']: item for item in complex_array}
-
-    for item in simple_array:
-        if item['id'] in complex_map:
-            item['fish'] = complex_map[item['id']]['fish']
-
-    # print(simple_array)
-
-
-
-    print(f' 全部结束，总共 {len(simple_array)} 条数据')
-
-    data = {
-        'items': simple_array,
-    }
-
-    with open('result.json', 'w', encoding='utf-8') as f:
-        json.dump(data, f, indent=4, ensure_ascii=False)
+    # # 整理出第一个数组
+    # simple_array = []
+    # grid = a.pos_grid()
+    # # last_10 = grid[46:56]
+    # for _grid in grid:
+    #     simple_array.extend(a.get_list(_grid['west'], _grid['east'], _grid['south'], _grid['north']))
+    #
+    # # print(simple_array[-2:])
+    #
+    # # 只取id，并每100个id组成一个新数组
+    # id_batches = [
+    #     [_['id'] for _ in simple_array[i:i + 100]]
+    #     for i in range(0, len(simple_array), 100)
+    # ]
+    #
+    # # 整理出第二个数组
+    # complex_array = []
+    # for id in id_batches:
+    #     complex_array.extend(a.get_detail(",".join(str(i) for i in id)))
+    #
+    #
+    # # 根据第二个数组完善第一个数组
+    # complex_map = {item['id']: item for item in complex_array}
+    #
+    # for item in simple_array:
+    #     if item['id'] in complex_map:
+    #         item['fish'] = complex_map[item['id']]['fish']
+    #
+    # # print(simple_array)
+    #
+    #
+    #
+    # print(f' 全部结束，总共 {len(simple_array)} 条数据')
+    #
+    # data = {
+    #     'items': simple_array,
+    # }
+    #
+    # with open('result.json', 'w', encoding='utf-8') as f:
+    #     json.dump(data, f, indent=4, ensure_ascii=False)
 
 
     # 上传到github 测试文件下载...............
