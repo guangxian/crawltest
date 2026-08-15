@@ -232,10 +232,14 @@ if __name__ == "__main__":
 
     items = []
     grid = a.pos_grid()
-    for _grid in grid:
+    last_10 = grid[-1:]
+    for _grid in last_10:
         items.extend(a.get_list(_grid['west'], _grid['east'], _grid['south'], _grid['north']))
 
     print(f' 全部结束，总共 {len(items)} 条数据')
+
+    with open('result.json', 'w', encoding='utf-8') as f:
+        json.dump(items, f, indent=4, ensure_ascii=False)
 
 
     # 上传到github 测试文件下载
