@@ -195,21 +195,6 @@ class A:
 if __name__ == "__main__":
     a = A()
 
-    # arrays = [
-    #     [str(i) for i in range(start, start + 100)]
-    #     for start in range(4000, 4500, 100)
-    # ]
-    #
-    # items = []
-    # for array in arrays:
-    #     result = ",".join(array)
-    #     _items = a.get_detail(result)
-    #     items.extend(_items)
-    #
-    # print(f'全部结束，总共 {len(items)} 条数据')
-
-    # a.get_detail('2777')
-    # a.get_list()
 
     # 整理出第一个数组
     simple_array = []
