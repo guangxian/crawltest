@@ -214,7 +214,7 @@ if __name__ == "__main__":
     # 整理出第一个数组
     simple_array = []
     grid = a.pos_grid()
-    last_10 = grid[46:55]
+    last_10 = grid[46:56]
     for _grid in last_10:
         simple_array.extend(a.get_list(_grid['west'], _grid['east'], _grid['south'], _grid['north']))
 
