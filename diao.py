@@ -214,11 +214,11 @@ if __name__ == "__main__":
     # 整理出第一个数组
     simple_array = []
     grid = a.pos_grid()
-    last_10 = grid[46:56]
-    for _grid in last_10:
+    # last_10 = grid[46:56]
+    for _grid in grid:
         simple_array.extend(a.get_list(_grid['west'], _grid['east'], _grid['south'], _grid['north']))
 
-    print(simple_array[-2:])
+    # print(simple_array[-2:])
 
     # 只取id，并每100个id组成一个新数组
     id_batches = [
@@ -239,7 +239,7 @@ if __name__ == "__main__":
         if item['id'] in complex_map:
             item['fish'] = complex_map[item['id']]['fish']
 
-    print(simple_array)
+    # print(simple_array)
 
 
 
@@ -249,8 +249,8 @@ if __name__ == "__main__":
         'items': simple_array,
     }
 
-    # with open('result.json', 'w', encoding='utf-8') as f:
-    #     json.dump(data, f, indent=4, ensure_ascii=False)
+    with open('result.json', 'w', encoding='utf-8') as f:
+        json.dump(data, f, indent=4, ensure_ascii=False)
 
 
     # 上传到github 测试文件下载..........
