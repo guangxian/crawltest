@@ -232,7 +232,7 @@ if __name__ == "__main__":
 
     items = []
     grid = a.pos_grid()
-    last_10 = grid[-1:]
+    last_10 = grid[49:55]
     for _grid in last_10:
         items.extend(a.get_list(_grid['west'], _grid['east'], _grid['south'], _grid['north']))
 
