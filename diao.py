@@ -9,8 +9,6 @@ class A:
         url = 'https://www.bkdiao.com/wp-admin/admin-ajax.php'
         headers = {
             'User-Agent': 'Mozilla/5.0',
-            # 'Cookie': 'Hm_lvt_ca860721dce125856eb54faa9f7565a1=1786700246; HMACCOUNT=894AB083B6956AD6; prefers-color-scheme=light; bkdiao_spot_view_4748=1; bkdiao_spot_view_4608=1; Hm_lpvt_ca860721dce125856eb54faa9f7565a1=1786700741'
-            # 'Referer': 'Tokyo District 1 Street Decos'
         }
         params = {
             'action': 'bkdiao_get_spot_viewport_details',
@@ -20,11 +18,17 @@ class A:
 
         data = response.json()
 
-        print(data)
+        # print(data)
 
         if isinstance(data['data'], dict):
-            result = list(data['data'].values())
-            return result
+            items = []
+            for item in list(data['data'].values()):
+                # if item.get('spot_type') not in ('收费黑坑', '收费水库'):
+                items.append({
+                    'id': item.get('id'),
+                    'fish': item['fish_type'].replace("、", ",")
+                })
+            return items
         else:
             return []
 
@@ -33,25 +37,7 @@ class A:
         url = 'https://www.bkdiao.com/wp-admin/admin-ajax.php'
         headers = {
             'User-Agent': 'Mozilla/5.0',
-            # 'Cookie': 'Hm_lvt_ca860721dce125856eb54faa9f7565a1=1786700246; HMACCOUNT=894AB083B6956AD6; prefers-color-scheme=light; bkdiao_spot_view_4748=1; bkdiao_spot_view_4608=1; Hm_lpvt_ca860721dce125856eb54faa9f7565a1=1786700741'
-            # 'Referer': 'Tokyo District 1 Street Decos'
         }
-        # params = {
-        #     'action': 'bkdiao_get_spots_in_bounds',
-        #     'west': 104.63530364,
-        #     'east': 106.27546636,
-        #     'south': 30.743205,
-        #     'north': 31.023704,
-        #     'limit': 320
-        # }
-        # params = {
-        #     'action': 'bkdiao_get_spots_in_bounds',
-        #     'west': 29.081794599999995,
-        #     'east': 180,
-        #     'south': 20.265079280000002,
-        #     'north': 47.835157720000005,
-        #     'limit': 9890
-        # }
         params = {
             'action': 'bkdiao_get_spots_in_bounds',
             'west': west,
@@ -67,47 +53,21 @@ class A:
         # print(data)
 
         if data.get('success'):
-            # print(f'len: {len(data.get("data"))}')
-            # with open('result.json', 'w', encoding='utf-8') as f:
-            #     json.dump(data, f, indent=4, ensure_ascii=False)
-            return data.get("data")
-        else:
-            # print('error.....')
-            return []
-
-    def format(self, items: list):
-        for item in items:
-            if item.get('spot_type') not in ('收费黑坑', '收费水库'):
-                fish = item['fish_type'].replace("、", ",")
-                type = 'WILD_FISHING'
-                type_desc = '野钓'
-                # lng = item['lng']
-                # lat = item['lat']
-            pass
-
-    def geocode(self, lng, lat):
-        pass
-
-    def clean(self, items):
-        return_items = []
-        for item in items:
-            if item.get('spot_type') not in ('收费黑坑', '收费水库'):
-                fish = '' # item['fish_type'].replace("、", ",")
-                type = 'WILD_FISHING'
-                type_desc = '野钓'
-                lng = item['lng']
-                lat = item['lat']
-                address = item['title']
-
-                return_items.append({
-                    'fish': fish,
-                    'type': type,
-                    'type_desc': type_desc,
-                    'lng': lng,
-                    'lat': lat,
-                    'address': address,
+            items = []
+            for item in data.get("data"):
+                # if item.get('spot_type') not in ('收费黑坑', '收费水库'):
+                items.append({
+                    'id': id,
+                    'fish': "",
+                    'type': 'WILD_FISHING',
+                    'type_desc': '野钓',
+                    'lng': item['lng'],
+                    'lat': item['lat'],
+                    'address': item['title'],
                 })
-        return return_items
+            return items
+        else:
+            return []
 
     def pos_grid(self):
         return [
@@ -251,19 +211,45 @@ if __name__ == "__main__":
     # a.get_detail('2777')
     # a.get_list()
 
-    items = []
+    # 整理出第一个数组
+    simple_array = []
     grid = a.pos_grid()
     last_10 = grid[46:54]
     for _grid in last_10:
-        items.extend(a.get_list(_grid['west'], _grid['east'], _grid['south'], _grid['north']))
+        simple_array.extend(a.get_list(_grid['west'], _grid['east'], _grid['south'], _grid['north']))
 
 
-    items = a.clean(items)
+    # 只取id，并每100个id组成一个新数组
+    id_batches = [
+        [_['id'] for _ in simple_array[i:i + 100]]
+        for i in range(0, len(simple_array), 100)
+    ]
 
-    print(f' 全部结束，总共 {len(items)} 条数据')
+    # 整理出第二个数组
+    complex_array = []
+    for id in id_batches:
+        complex_array.extend(a.get_detail(",".join(id)))
+
+
+    # 根据第二个数组完善第一个数组
+    complex_map = {item['id']: item for item in complex_array}
+
+    for item in simple_array:
+        if item['id'] in complex_map:
+            item['fish'] = complex_map[item['id']]['fish']
+
+    print(simple_array)
+
+
+
+    print(f' 全部结束，总共 {len(simple_array)} 条数据')
+
+    data = {
+        'items': simple_array,
+    }
 
     with open('result.json', 'w', encoding='utf-8') as f:
-        json.dump(items, f, indent=4, ensure_ascii=False)
+        json.dump(data, f, indent=4, ensure_ascii=False)
 
 
     # 上传到github 测试文件下载
