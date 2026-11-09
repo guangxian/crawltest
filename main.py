@@ -45,7 +45,7 @@ class Mx:
                 'riverWaterLevel': river_water_level,
                 'reservoirWaterLevel': reservoir_water_level,
                 'reservoirFluctuation': reservoir_fluctuation,
-                'createTime': v['createTime'],
+                'createTime': datetime.strptime(v['createTime'], "%Y-%m-%d %H:%M:%S").isoformat(), # v['createTime'],
                 'idNo': str(v['idNo']),
             }
             items.append(row)
