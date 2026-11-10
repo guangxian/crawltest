@@ -24,6 +24,11 @@ class Mx:
     def format_data(self, data):
         items = []
         for i, v in enumerate(data.get('result', [])):
+
+            create_time = v.get('createTime')
+            if not create_time:  # None 或空字符串都跳过
+                continue
+
             river_water_level = ''
             reservoir_water_level = ''
             reservoir_fluctuation = ''
@@ -45,7 +50,7 @@ class Mx:
                 'riverWaterLevel': river_water_level,
                 'reservoirWaterLevel': reservoir_water_level,
                 'reservoirFluctuation': reservoir_fluctuation,
-                'createTime': datetime.strptime(v['createTime'], "%Y-%m-%d %H:%M:%S").isoformat(), # v['createTime'],
+                'createTime': datetime.strptime(create_time, "%Y-%m-%d %H:%M:%S").isoformat(), # v['createTime'],
                 'idNo': str(v['idNo']),
             }
             items.append(row)
